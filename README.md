@@ -1,6 +1,6 @@
-# ToDoAppV2
+# ToDoAppV3
 
-Open repository ---> cd ToDoApp
+Open repository ---> cd ToDoAppV#
 
 Install packages ----> npm install
 
