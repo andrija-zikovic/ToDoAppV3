@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react'
+import { useParams, useNavigate } from 'react-router'
+import { descriptionInputValidation } from '../../scripts/validation/validations'
+import { TTodo } from '../../shared/types/types'
+import { localStorageWrapper } from '../storage/storage'
 import TodoContext from '../context/todoContext'
 import MessageContext from '../context/messageContext'
 import TextInput from '../../shared/ui/Inputs/Input'
 import SelectInput from '../../shared/ui/Selects/Select'
 import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
-import { useParams, useNavigate } from 'react-router'
-import { descriptionInputValidation } from '../../scripts/validation/validations'
-import { TTodo } from '../../shared/types/types'
-import { localStorageWrapper } from '../storage/storage'
+import PopupWindow from '../../shared/ui/PopupWindow/PopupWindow'
 
 const EditScreen = () => {
     const navigate = useNavigate()
@@ -45,7 +46,7 @@ const EditScreen = () => {
         } catch (error) {
             console.error(error)
             setInfoMessages([
-                { message: 'Error updating To do', type: 'error' },
+                { message: 'Error updating To do!', type: 'error' },
             ])
         }
     }
@@ -64,12 +65,15 @@ const EditScreen = () => {
         try {
             localTable.splice(localTable.indexOf(item), 1)
             localStorageWrapper.setItem('toDos', localTable)
+
             setCurrentTable(localTable)
-            setInfoMessages([{ message: 'To do deleted', type: 'success' }])
+
+            setInfoMessages([{ message: 'To do deleted!', type: 'success' }])
+
             navigate('/')
         } catch (error) {
             setInfoMessages([
-                { message: 'Error deleting To do', type: 'error' },
+                { message: 'Error deleting To do!', type: 'error' },
             ])
         }
     }
@@ -103,50 +107,51 @@ const EditScreen = () => {
                 <div className="flex flex-col justify-evenly items-center gap-8 md:flex-row">
                     <div className="flex flex-col justify-center items-center relative">
                         <TextInput
-                            LABEL="Change description"
-                            PLACEHOLDER="Change description..."
-                            NAME="edit"
-                            ON_CHANGE={setDescription}
-                            MESSAGE={message}
-                            REQUIRED={false}
+                            label="Change description"
+                            placeholder="Change description..."
+                            name="edit"
+                            value={description}
+                            on_change={setDescription}
+                            message={message}
                         />
                         <div className="text-red-600 absolute top-full">
                             <p>{message}</p>
                         </div>
                     </div>
                     <SelectInput
-                        LABEL="Change stage"
-                        NAME="stage"
-                        VALUE={stage}
-                        ON_CHANGE={setStage}
-                        MESSAGE=""
+                        label="Change stage"
+                        name="stage"
+                        value={stage}
+                        on_change={setStage}
                     />
                 </div>
                 <SubmitButton />
             </form>
             {deleteMessage && (
-                <div className="absolute w-full top-1/2 flex flex-col justify-center items-center md:w-96">
-                    <div className="w-3/4 flex flex-col justify-center items-center p-4 rounded-md gap-3 border-2 border-gray-700 bg-orange-200">
-                        <p className=" font-bold">Delete To do!</p>
-                        <p>Are you sure?</p>
-                        <div className="flex flex-row justify-evenly items-center gap-2 w-full">
-                            <button
-                                onClick={handleDelete}
-                                className=" bg-white hover:bg-red-300 "
-                            >
-                                Yes
-                            </button>
-                            <button
-                                onClick={() => {
-                                    setDeleteMessage(false)
-                                }}
-                                className="bg-white"
-                            >
-                                No
-                            </button>
+                <PopupWindow
+                    children={
+                        <div className="w-3/4 flex flex-col justify-center items-center p-4 rounded-md gap-3 border-2 border-gray-700 bg-orange-200">
+                            <p className=" font-bold">Delete To do!</p>
+                            <p>Are you sure?</p>
+                            <div className="flex flex-row justify-evenly items-center gap-2 w-full">
+                                <button
+                                    onClick={handleDelete}
+                                    className=" bg-white hover:bg-red-300 "
+                                >
+                                    Yes
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setDeleteMessage(false)
+                                    }}
+                                    className="bg-white"
+                                >
+                                    No
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    }
+                />
             )}
         </div>
     )

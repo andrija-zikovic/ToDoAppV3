@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useEffect } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { TInfoMessage } from '../../shared/types/types'
 
 type ContextProviderProps = {

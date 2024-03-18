@@ -11,20 +11,30 @@ type ToDoCardProps = {
 }
 
 const ToDoCard = ({ item }: ToDoCardProps) => {
-    const createdAt = dayjs(item.created_at).format('YYYY-MM-DD HH:mm')
+    const createdAtTime = dayjs(item.created_at).format('HH:mm')
+    const createdAtDate = dayjs(item.created_at).format('DD. MM. YYYY.')
+
+    const bg_color =
+        item.stage === 'done'
+            ? 'bg-green-400'
+            : item.stage === 'in_progress'
+              ? 'bg-orange-400'
+              : ''
+
     return (
         <div
-            className={`relative w-full p-3 rounded-md text-2xl border-2 border-gray-400 text-center hover:bg-orange-200 hover:border-gray-700 hover:text-gray-700 ${item.stage === 'done' ? ' bg-green-400' : item.stage === 'in_progress' ? 'bg-orange-400' : ''} md:max-w-2xl`}
+            className={`relative w-full p-3 rounded-md text-2xl border-2 border-gray-400 text-center hover:bg-orange-200 hover:border-gray-700 hover:text-gray-700 ${bg_color} md:max-w-2xl`}
         >
             <Link
                 to={`todo/edit/${item ? item.id : ''}`}
                 className="block w-full h-full p-2"
             >
                 {item.description}
+                <div className="absolute top-1 left-1 text-sm w-full flex flex-row justify-between px-2">
+                    <p>{createdAtTime}</p>
+                    <p>{createdAtDate}</p>
+                </div>
             </Link>
-            <div className="absolute top-1 left-1 text-sm">
-                <p>{createdAt}</p>
-            </div>
         </div>
     )
 }

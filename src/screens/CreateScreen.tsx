@@ -85,12 +85,12 @@ const CreateScreen = () => {
             >
                 <div className="relative">
                     <TextInput
-                        LABEL="Description"
-                        PLACEHOLDER="Type here..."
-                        NAME="description"
-                        ON_CHANGE={setDescription}
-                        MESSAGE={message}
-                        REQUIRED={true}
+                        label="Description"
+                        placeholder="Type here..."
+                        name="description"
+                        on_change={setDescription}
+                        message={message}
+                        required={true}
                     />
                     <div className="text-red-600 absolute top-full text-center w-full">
                         <p>{message}</p>

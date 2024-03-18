@@ -4,15 +4,17 @@ type InfoMessageProps = {
 }
 
 const InfoMessage = ({ message, type }: InfoMessageProps) => {
+    const status = {
+        error: 'bg-red-200 border-red-600',
+        success: 'bg-green-200',
+        default: 'bg-gray-200',
+    }
+
     return (
         <div
-            className={`w-full p-2 flex flex-row justify-center items-center text-center
-             gap-2 border-2 border-gray-800 rounded-md ${
-                 type === 'error'
-                     ? 'bg-red-200 border-red-600'
-                     : type === 'success'
-                       ? 'bg-green-200'
-                       : 'bg-gray-200'
+            className={`w-80 p-2 flex justify-center items-center text-center
+             border-2 border-gray-800 rounded-md ${
+                 status[type] || status.default
              }`}
         >
             <p>{message}</p>

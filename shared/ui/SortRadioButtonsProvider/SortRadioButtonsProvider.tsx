@@ -11,6 +11,7 @@ export const SortRadioButtonsProvider = () => {
             setCurrentTable(localTable)
             return
         }
+
         setCurrentTable(localTable.filter((todo) => todo.stage === stage))
     }
 
