@@ -6,7 +6,7 @@ type DropDownMenuProps = {
 
 export const DropDownMenu = ({ setDropDownVisibility }: DropDownMenuProps) => {
     return (
-        <div className="absolute top-full z-10 w-full h-auto bg-gray-700 flex flex-col justify-center items-center gap-2 px-2 py-4 border-b-2 border-orange-200 text-3xl">
+        <div className="absolute top-16 z-10 w-full h-auto bg-gray-700 flex flex-col justify-center items-center gap-2 px-2 py-4 border-b-2 border-orange-200 text-3xl">
             <div className=" text-orange-200 w-full h-full flex flex-col justify-center items-center border-b-2 border-orange-200 hover:border-slate-400 hover:text-slate-400 p-3">
                 <Link
                     to="/home"

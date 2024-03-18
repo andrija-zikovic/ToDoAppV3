@@ -9,15 +9,15 @@ const MenuButton = ({
     setDropDownVisibility,
     dropDownVisibility,
 }: MenuButtonProps) => {
-    const toogleVisibility = () => {
+    const toggleVisibility = () => {
         setDropDownVisibility(!dropDownVisibility)
     }
 
     return (
         <button
             id="menu"
-            className="absolute right-4 top-4 w-8 h-8 bg-orange-200 p-1 flex justify-center items-center rounded-md hover:border-l-orange-50 hover:border transition-all duration-300 ease-in-out md:hidden"
-            onClick={toogleVisibility}
+            className="w-8 h-8 bg-orange-200 p-1 flex justify-center items-center rounded-md hover:border-l-orange-50 hover:border transition-all duration-300 ease-in-out md:hidden"
+            onClick={toggleVisibility}
         >
             <Menu />
         </button>
