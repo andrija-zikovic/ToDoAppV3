@@ -8,7 +8,7 @@ export const HeaderComponent = () => {
 
     return (
         <div className="flex flex-col justify-center items-center w-full bg-gray-700 border-b-1 border-gray-700 relative">
-            <div className="flex flex-row justify-center items-center max-w-full w-full text-center px-4 p-3 relative md:p-6">
+            <div className="flex flex-row justify-center items-center max-w-full w-full text-center px-4 p-3 md:p-6">
                 <MenuButton
                     setDropDownVisibility={setDropDownVisibility}
                     dropDownVisibility={dropDownVisibility}
@@ -16,11 +16,11 @@ export const HeaderComponent = () => {
                 <h1 className="text-4xl text-orange-200 md:text-7xl">
                     Todo App
                 </h1>
-                {dropDownVisibility ? (
+                {dropDownVisibility && (
                     <DropDownMenu
                         setDropDownVisibility={setDropDownVisibility}
                     />
-                ) : null}
+                )}
             </div>
             <div className="hidden md:flex flex-row justify-start items-center w-full absolute bottom-2 left-2">
                 <div>

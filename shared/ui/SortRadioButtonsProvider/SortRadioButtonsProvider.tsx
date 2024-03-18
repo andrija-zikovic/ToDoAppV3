@@ -1,15 +1,10 @@
 import { useContext } from 'react'
-import Context from '../../../src/context/todoContext'
+import TodoContext from '../../../src/context/todoContext'
 import { SortRadioButton } from '../Buttons/SortRadioButton'
 import { Stage } from '../../enums/stage'
 
 export const SortRadioButtonsProvider = () => {
-    const contextValue = useContext(Context) || {
-        setCurrentTable: () => {},
-        localTable: [],
-    }
-
-    const { setCurrentTable, localTable } = contextValue
+    const { setCurrentTable, localTable } = useContext(TodoContext)!
 
     const sortByStage = (stage: string) => {
         if (stage === Stage.ALL) {

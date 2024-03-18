@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import Context from '../../../src/context/todoContext'
+import TodoContext from '../../../src/context/todoContext'
 import ToDoCard from '../ToDoCard/ToDoCard'
 import { Link } from 'react-router-dom'
 
 const Table = () => {
-    const { currentTable } = useContext(Context)!
+    const { currentTable } = useContext(TodoContext)!
     return (
         <div
             id="ToDosTable"

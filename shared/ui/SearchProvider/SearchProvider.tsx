@@ -1,10 +1,10 @@
 import { useContext } from 'react'
-import Context from '../../../src/context/todoContext'
+import TodoContext from '../../../src/context/todoContext'
 import SearchBox from '../SearchBox/SearchBox'
 import SortDateButtonProvider from '../SortDate/SortDateButtonProvider'
 
 export const SearchProvider = () => {
-    const { localTable, setCurrentTable } = useContext(Context)!
+    const { localTable, setCurrentTable } = useContext(TodoContext)!
 
     const handleSearch = (value: string) => {
         if (value === '') {

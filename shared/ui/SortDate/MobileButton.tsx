@@ -1,4 +1,4 @@
-import { DateDown, DateUp } from '../icons/index'
+import { DateDown, DateUp } from '../Icons/index'
 import { SortStage } from '../../enums/stage'
 
 type MobileButtonProps = {

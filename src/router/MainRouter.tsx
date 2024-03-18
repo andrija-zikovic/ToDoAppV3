@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import HeaderComponent from '../../shared/ui/header/HeaderComponent'
+import HeaderComponent from '../../shared/ui/Header/HeaderComponent'
 import ListScreen from '../screens/ListScreen'
 import CreateScreen from '../screens/CreateScreen'
 import EditScreen from '../screens/EditScreen'

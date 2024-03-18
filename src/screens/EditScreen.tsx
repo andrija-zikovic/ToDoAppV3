@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import Context from '../context/todoContext'
+import TodoContext from '../context/todoContext'
+import MessageContext from '../context/messageContext'
 import TextInput from '../../shared/ui/Inputs/Input'
 import SelectInput from '../../shared/ui/Selects/Select'
 import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
@@ -10,8 +11,8 @@ import { localStorageWrapper } from '../storage/storage'
 
 const EditScreen = () => {
     const navigate = useNavigate()
-    const { localTable, setCurrentTable, setInfoMessages } =
-        useContext(Context)!
+    const { localTable, setCurrentTable } = useContext(TodoContext)!
+    const { setInfoMessages } = useContext(MessageContext)!
     const { id } = useParams()
     const item = localTable.find((item) => item.id.toString() === id) as TTodo
 

@@ -1,25 +1,22 @@
 import React, { useState, useContext } from 'react'
-import Context from '../context/todoContext'
 import { useNavigate } from 'react-router'
-import TextInput from '../../shared/ui/Inputs/Input'
-import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
-import { localStorageWrapper } from '../storage/storage'
 import dayjs from 'dayjs'
+import { localStorageWrapper } from '../storage/storage'
 import { Stage } from '../../shared/enums/stage'
 import { TInfoMessage } from '../../shared/types/types'
 import { descriptionInputValidation } from '../../scripts/validation/validations'
+import TodoContext from '../context/todoContext'
+import MessageContext from '../context/messageContext'
+import TextInput from '../../shared/ui/Inputs/Input'
+import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
 
 const CreateScreen = () => {
     const navigate = useNavigate()
     const [description, setDescription] = useState('')
     const [message, setMessage] = useState('')
-    const contextValues = useContext(Context) || {
-        infoMessages: [],
-        setInfoMessages: () => {},
-        setCurrentTable: () => {},
-    }
 
-    const { infoMessages, setInfoMessages, setCurrentTable } = contextValues
+    const { infoMessages, setInfoMessages } = useContext(MessageContext)!
+    const { setCurrentTable } = useContext(TodoContext)!
 
     const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()

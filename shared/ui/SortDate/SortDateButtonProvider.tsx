@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react'
 import { MobileButton } from './MobileButton'
 import { SortStage } from '../../enums/stage'
-import Context from '../../../src/context/todoContext'
+import TodoContext from '../../../src/context/todoContext'
 
 export const SortDateButtonProvider = () => {
-    const { currentTable, setCurrentTable } = useContext(Context)!
+    const { currentTable, setCurrentTable } = useContext(TodoContext)!
 
     const [sort, setSort] = useState(SortStage.OLDEST)
 
