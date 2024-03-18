@@ -1,7 +1,8 @@
-import SortRadioButtonsProvider from '../ui/SortRadioButtonsProvider/SortRadioButtonsProvider'
+import SortRadioButtonsProvider from '../ui/SortRadioInputProvider/SortRadioInputProvider'
 import SearchBox from '../ui/SearchBox/SearchBox'
-import SortByDateButton from '../ui/SortByDateButton/SortByDateButton'
+import SortByDateButton from '../ui/Buttons/SortByDateButton'
 import Table from '../ui/Table/Table'
+
 export default function ListScreen() {
     return (
         <div className="w-full">

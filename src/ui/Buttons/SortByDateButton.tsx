@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { DateDown, DateUp } from '../Icons/index'
 import { SortStage } from '../../enums/stage'
-import TodoContext from '../../../src/context/todoContext'
+import TodoContext from '../../context/todoContext'
 
 export const SortByDateButton = () => {
     const { currentTable, setCurrentTable } = useContext(TodoContext)!

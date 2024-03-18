@@ -5,20 +5,23 @@ import { TTodo } from '../types/types'
 import { localStorageWrapper } from '../storage/storage'
 import TodoContext from '../context/todoContext'
 import MessageContext from '../context/messageContext'
-import TextInput from '../ui/Inputs/Input'
-import SelectInput from '../ui/Selects/Select'
+import TextInput from '../ui/Inputs/TextInput'
+import SelectInput from '../ui/Inputs/SelectInput'
 import SubmitButton from '../ui/Buttons/SubmitButton'
 import PopupWindow from '../ui/PopupWindow/PopupWindow'
 
 const EditScreen = () => {
     const navigate = useNavigate()
+
     const { localTable, setCurrentTable } = useContext(TodoContext)!
     const { setInfoMessages } = useContext(MessageContext)!
     const { id } = useParams()
+
     const item = localTable.find((item) => item.id.toString() === id) as TTodo
 
     const [description, setDescription] = useState(item.description)
     const [stage, setStage] = useState(item.stage)
+
     const [message, setMessage] = useState('')
     const [deleteMessage, setDeleteMessage] = useState(false)
 
@@ -85,6 +88,7 @@ const EditScreen = () => {
                     onClick={() => {
                         navigate(-1)
                     }}
+                    className="dark:border-orange-200"
                 >
                     Back
                 </button>
@@ -92,12 +96,12 @@ const EditScreen = () => {
                     onClick={() => {
                         setDeleteMessage(true)
                     }}
-                    className="bg-red-300"
+                    className="bg-red-300 dark:text-gray-700"
                 >
                     Delete
                 </button>
             </div>
-            <h1 className="text-3xl text-center p-3 border-b-2 mt-14 w-full md:mt-32">
+            <h1 className="text-3xl text-center p-3 border-b-2 mt-14 w-full md:mt-32 dark:border-orange-200">
                 {description.length > 0 ? description : item.description}
             </h1>
             <form
@@ -130,7 +134,7 @@ const EditScreen = () => {
             {deleteMessage && (
                 <PopupWindow
                     children={
-                        <div className=" w-80 flex flex-col justify-center items-center p-4 rounded-md gap-3 border-2 border-gray-700 bg-orange-200">
+                        <div className=" w-80 flex flex-col justify-center items-center p-4 rounded-md gap-3 border-2 border-gray-700 bg-orange-200 dark:text-gray-700">
                             <p className=" font-bold">Delete To do!</p>
                             <p>Are you sure?</p>
                             <div className="flex flex-row justify-evenly items-center gap-2 w-full">

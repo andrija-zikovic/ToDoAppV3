@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import TodoContext from '../../../src/context/todoContext'
+import TodoContext from '../../context/todoContext'
 
 export const SearchBox = () => {
     const { localTable, setCurrentTable } = useContext(TodoContext)!

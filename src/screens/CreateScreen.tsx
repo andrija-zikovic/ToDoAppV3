@@ -7,7 +7,7 @@ import { TInfoMessage } from '../types/types'
 import { descriptionInputValidation } from '../validation/validations'
 import TodoContext from '../context/todoContext'
 import MessageContext from '../context/messageContext'
-import TextInput from '../ui/Inputs/Input'
+import TextInput from '../ui/Inputs/TextInput'
 import SubmitButton from '../ui/Buttons/SubmitButton'
 
 const CreateScreen = () => {
@@ -54,7 +54,6 @@ const CreateScreen = () => {
 
             navigate('/')
         } catch (error) {
-            console.error(error)
             setInfoMessages([
                 ...infoMessages,
                 {
@@ -74,6 +73,7 @@ const CreateScreen = () => {
                     onClick={() => {
                         navigate('/')
                     }}
+                    className="dark:border-orange-200"
                 >
                     Back
                 </button>

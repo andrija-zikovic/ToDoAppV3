@@ -5,26 +5,28 @@ type DropDownMenuProps = {
 }
 
 export const DropDownMenu = ({ setDropDownVisibility }: DropDownMenuProps) => {
+    const dropDownPath = [
+        {
+            path: '/home',
+            name: 'Home',
+        },
+        {
+            path: '/todo/create',
+            name: 'Create',
+        },
+    ]
+
     return (
         <div className="absolute top-16 z-10 w-full h-auto bg-gray-700 flex flex-col justify-center items-center gap-2 px-2 py-4 border-b-2 border-orange-200 text-3xl">
-            <div className=" text-orange-200 w-full h-full flex flex-col justify-center items-center border-b-2 border-orange-200 hover:border-slate-400 hover:text-slate-400 p-3">
+            {dropDownPath.map((item) => (
                 <Link
-                    to="/home"
-                    className=" w-full h-full flex flex-row justify-center items-center "
+                    to={item.path}
+                    className=" w-full h-full text-center text-orange-200 p-2 border-b-2 border-orange-200 hover:text-gray-400 hover:border-gray-400 transition-all duration-200 ease-in-out"
                     onClick={() => setDropDownVisibility(false)}
                 >
-                    Home
+                    {item.name}
                 </Link>
-            </div>
-            <div className="text-orange-200 w-full h-full flex flex-col justify-center items-center border-b-2 border-orange-200 hover:border-slate-400 hover:text-slate-400 p-3">
-                <Link
-                    to="/todo/create"
-                    className=" w-full h-full flex flex-row justify-center items-center"
-                    onClick={() => setDropDownVisibility(false)}
-                >
-                    Create
-                </Link>
-            </div>
+            ))}
         </div>
     )
 }

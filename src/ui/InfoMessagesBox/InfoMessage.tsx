@@ -15,7 +15,7 @@ const InfoMessage = ({ message, type }: InfoMessageProps) => {
             className={`w-80 p-2 flex justify-center items-center text-center
              border-2 border-gray-800 rounded-md ${
                  status[type] || status.default
-             }`}
+             } dark:text-gray-700`}
         >
             <p>{message}</p>
         </div>

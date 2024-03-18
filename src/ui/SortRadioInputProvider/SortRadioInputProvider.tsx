@@ -1,9 +1,9 @@
 import { useContext } from 'react'
-import TodoContext from '../../../src/context/todoContext'
-import { SortRadioButton } from '../Buttons/SortRadioButton'
+import TodoContext from '../../context/todoContext'
+import SortByStageRadioInput from '../Inputs/SortByStageRadioInput'
 import { Stage } from '../../enums/stage'
 
-export const SortRadioButtonsProvider = () => {
+export const SortRadioInputProvider = () => {
     const { setCurrentTable, localTable } = useContext(TodoContext)!
 
     const sortByStage = (stage: string) => {
@@ -17,22 +17,22 @@ export const SortRadioButtonsProvider = () => {
 
     return (
         <fieldset className="grid grid-cols-2 grid-rows-2 md:flex md:flex-row md:justify-between items-center w-full p-3 font-bold text-gray-700 md:w-auto">
-            <SortRadioButton
+            <SortByStageRadioInput
                 title="All"
                 stage={Stage.ALL}
                 sortStageBy={sortByStage}
             />
-            <SortRadioButton
+            <SortByStageRadioInput
                 title="Pending"
                 stage={Stage.PENDING}
                 sortStageBy={sortByStage}
             />
-            <SortRadioButton
+            <SortByStageRadioInput
                 title="In Progress"
                 stage={Stage.IN_PROGRESS}
                 sortStageBy={sortByStage}
             />
-            <SortRadioButton
+            <SortByStageRadioInput
                 title="Done"
                 stage={Stage.DONE}
                 sortStageBy={sortByStage}
@@ -41,4 +41,4 @@ export const SortRadioButtonsProvider = () => {
     )
 }
 
-export default SortRadioButtonsProvider
+export default SortRadioInputProvider

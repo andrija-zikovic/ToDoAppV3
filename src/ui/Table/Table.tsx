@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import TodoContext from '../../../src/context/todoContext'
+import TodoContext from '../../context/todoContext'
 import ToDoCard from '../ToDoCard/ToDoCard'
 import { Link } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ const Table = () => {
                     <p className="p-8">No Items To Show</p>
                     <Link
                         to="/todo/create"
-                        className="border-2 border-gray-700 p-2 rounded-md hover:bg-orange-200"
+                        className="border-2 border-gray-700 p-2 rounded-md hover:bg-orange-200 dark:border-orange-200 dark:hover:text-gray-700"
                     >
                         Create ToDo
                     </Link>

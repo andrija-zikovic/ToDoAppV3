@@ -1,12 +1,12 @@
 import React from 'react'
 
-type SortRadioButtonProps = {
+type RadioInputProps = {
     title: string
     stage: string
     sortStageBy: (stage: string) => void
 }
 
-export const SortRadioButton: React.FC<SortRadioButtonProps> = ({
+export const SortByStageRadioInput: React.FC<RadioInputProps> = ({
     title,
     stage,
     sortStageBy,
@@ -34,4 +34,4 @@ export const SortRadioButton: React.FC<SortRadioButtonProps> = ({
     )
 }
 
-export default SortRadioButton
+export default SortByStageRadioInput
