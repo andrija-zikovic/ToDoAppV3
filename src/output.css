@@ -724,6 +724,14 @@ video {
   max-width: 100%;
 }
 
+.max-w-28 {
+  max-width: 7rem;
+}
+
+.max-w-80 {
+  max-width: 20rem;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -908,6 +916,10 @@ video {
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .px-2 {
@@ -1189,6 +1201,10 @@ input:active {
 
   .md\:items-end {
     align-items: flex-end;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
   }
 
   .md\:justify-between {

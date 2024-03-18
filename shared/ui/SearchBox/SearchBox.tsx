@@ -1,4 +1,3 @@
-import React from 'react'
 import { useContext } from 'react'
 import TodoContext from '../../../src/context/todoContext'
 
@@ -8,17 +7,18 @@ export const SearchBox = () => {
     const handleSearch = (value: string) => {
         if (value === '') {
             setCurrentTable(localTable)
-        } else {
-            setCurrentTable(
-                localTable.filter((todo) =>
-                    todo.description.toLowerCase().includes(value.toLowerCase())
-                )
-            )
+            return
         }
+
+        const filteredTable = localTable.filter((todo) =>
+            todo.description.toLowerCase().includes(value.toLowerCase())
+        )
+
+        setCurrentTable(filteredTable)
     }
 
     return (
-        <div className="w-full p-3 flex flex-row justify-center items-center md:p-2">
+        <div className="w-full max-w-80 p-3 flex flex-row justify-center items-center md:p-2">
             <label htmlFor="search" className="sr-only ">
                 Search
             </label>

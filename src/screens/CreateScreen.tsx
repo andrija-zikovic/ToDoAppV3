@@ -12,6 +12,7 @@ import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
 
 const CreateScreen = () => {
     const navigate = useNavigate()
+
     const [description, setDescription] = useState('')
     const [message, setMessage] = useState('')
 
@@ -20,31 +21,47 @@ const CreateScreen = () => {
 
     const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
         const validation = descriptionInputValidation(description)
-        if (validation === true) {
-            try {
-                const storedTodos = localStorageWrapper.getItem('toDos') || []
-                const now = dayjs().valueOf()
-                const newTodo = {
-                    id: now,
-                    description: description,
-                    created_at: now,
-                    stage: Stage.PENDING,
-                }
-                const updatedTodos = [newTodo, ...storedTodos]
-                localStorageWrapper.setItem('toDos', updatedTodos)
-                setCurrentTable(updatedTodos)
-            } catch (error) {
-                console.error(error)
+
+        if (validation) {
+            setMessage(validation)
+            return
+        }
+
+        try {
+            const storedTodos = localStorageWrapper.getItem('toDos') || []
+
+            const now = dayjs().valueOf()
+
+            const newTodo = {
+                id: now,
+                description: description,
+                created_at: now,
+                stage: Stage.PENDING,
             }
+
+            const updatedTodos = [newTodo, ...storedTodos]
+
+            localStorageWrapper.setItem('toDos', updatedTodos)
+
+            setCurrentTable(updatedTodos)
+
             setInfoMessages([
                 ...infoMessages,
                 { message: 'ToDo created', type: 'success' } as TInfoMessage,
             ])
+
             navigate('/')
-        } else {
-            setMessage(validation)
-            return
+        } catch (error) {
+            console.error(error)
+            setInfoMessages([
+                ...infoMessages,
+                {
+                    message: 'Error creating ToDo',
+                    type: 'error',
+                } as TInfoMessage,
+            ])
         }
     }
 

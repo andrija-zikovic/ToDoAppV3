@@ -11,16 +11,17 @@ const Table = () => {
             className="w-full flex flex-col justify-start items-center gap-2 p-2 min-h-96 overflow-scroll"
         >
             {currentTable.length <= 0 ? (
-                <div className="w-full text-2xl flex flex-col justify-center items-center min-h-80 gap-8 text-center p-3">
-                    <p>No Items To Show</p>
-                    <button>
-                        <Link to="/todo/create">Create ToDo</Link>
-                    </button>
+                <div className="w-full text-2xl min-h-80 text-center">
+                    <p className="p-8">No Items To Show</p>
+                    <Link
+                        to="/todo/create"
+                        className="border-2 border-gray-700 p-2 rounded-md hover:bg-orange-200"
+                    >
+                        Create ToDo
+                    </Link>
                 </div>
             ) : (
-                currentTable.map((item, index) => (
-                    <ToDoCard key={index} index={index} item={item} />
-                ))
+                currentTable.map((item) => <ToDoCard item={item} />)
             )}
         </div>
     )

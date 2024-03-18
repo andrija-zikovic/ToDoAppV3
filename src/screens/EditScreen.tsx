@@ -26,36 +26,50 @@ const EditScreen = () => {
 
         const validation = descriptionInputValidation(description)
 
-        if (validation === true) {
-            item.description = description
-        } else {
+        if (validation) {
             console.log(validation)
             setMessage(validation)
             return
         }
 
-        item.stage = stage
+        try {
+            item.description = description
 
-        localStorageWrapper.setItem('toDos', localTable)
+            item.stage = stage
 
-        setCurrentTable(localTable)
+            localStorageWrapper.setItem('toDos', localTable)
 
-        navigate('/')
+            setCurrentTable(localTable)
+
+            navigate('/')
+        } catch (error) {
+            console.error(error)
+            setInfoMessages([
+                { message: 'Error updating To do', type: 'error' },
+            ])
+        }
     }
 
     const handleDelete = () => {
-        if (item.stage === 'done') {
-            localTable.splice(localTable.indexOf(item), 1)
-            localStorageWrapper.setItem('toDos', localTable)
-            setCurrentTable(localTable)
-            setInfoMessages([{ message: 'To do deleted', type: 'success' }])
-            navigate('/')
-        } else {
+        if (item.stage !== 'done') {
             setInfoMessages([
                 {
                     message: 'You can only delete To do that is "Done"!',
                     type: 'error',
                 },
+            ])
+            return
+        }
+
+        try {
+            localTable.splice(localTable.indexOf(item), 1)
+            localStorageWrapper.setItem('toDos', localTable)
+            setCurrentTable(localTable)
+            setInfoMessages([{ message: 'To do deleted', type: 'success' }])
+            navigate('/')
+        } catch (error) {
+            setInfoMessages([
+                { message: 'Error deleting To do', type: 'error' },
             ])
         }
     }

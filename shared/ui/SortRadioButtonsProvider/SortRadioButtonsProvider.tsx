@@ -9,9 +9,9 @@ export const SortRadioButtonsProvider = () => {
     const sortByStage = (stage: string) => {
         if (stage === Stage.ALL) {
             setCurrentTable(localTable)
-        } else {
-            setCurrentTable(localTable.filter((todo) => todo.stage === stage))
+            return
         }
+        setCurrentTable(localTable.filter((todo) => todo.stage === stage))
     }
 
     return (

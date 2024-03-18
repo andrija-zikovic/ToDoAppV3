@@ -1,28 +1,28 @@
 type InputType = {
-    LABEL: string
-    PLACEHOLDER: string
-    NAME: string
-    ON_CHANGE: (description: string) => void
-    MESSAGE: string
-    REQUIRED: boolean
+    label: string
+    placeholder: string
+    name: string
+    on_change: (description: string) => void
+    message: string
+    required?: boolean
 }
 
 const TextInput = ({
-    LABEL,
-    PLACEHOLDER,
-    NAME,
-    ON_CHANGE,
-    MESSAGE,
-    REQUIRED,
+    label,
+    placeholder,
+    name,
+    on_change,
+    message,
+    required,
 }: InputType) => {
     return (
         <div className="flex flex-col justify-center items-center gap-2 text-xl">
-            <label>{LABEL}</label>
+            <label>{label}</label>
             <input
                 type="text"
-                name={NAME}
-                placeholder={PLACEHOLDER}
-                onChange={(e) => ON_CHANGE(e.target.value)}
+                name={name}
+                placeholder={placeholder}
+                onChange={(e) => on_change(e.target.value)}
                 onFocus={(e) => {
                     setTimeout(
                         () =>
@@ -34,8 +34,8 @@ const TextInput = ({
                         150
                     )
                 }}
-                className={`w-auto h-12 p-2 border-2 ${MESSAGE.length > 2 ? 'bg-red-300 border-red-600' : 'bg-orange-200 border-gray-700'} rounded-md transition-all duration-300 ease-in-out text-gray-950`}
-                required={REQUIRED}
+                className={`w-auto h-12 p-2 border-2 ${message.length > 2 ? 'bg-red-300 border-red-600' : 'bg-orange-200 border-gray-700'} rounded-md transition-all duration-300 ease-in-out text-gray-950`}
+                required={required}
             />
         </div>
     )
