@@ -1,6 +1,6 @@
-import SortRadioButtonsProvider from '../../shared/ui/SortRadioButtonsProvider/src/components/SortRadioButtonsProvider'
-import SearchProvider from '../../shared/ui/SearchProvider/src/components/SearchProvider'
-import Table from '../../shared/ui/Table/src/components/Table'
+import SortRadioButtonsProvider from '../../shared/ui/SortRadioButtonsProvider/SortRadioButtonsProvider'
+import SearchProvider from '../../shared/ui/SearchProvider/SearchProvider'
+import Table from '../../shared/ui/Table/Table'
 
 export default function ListScreen() {
     return (

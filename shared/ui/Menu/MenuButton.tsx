@@ -1,4 +1,4 @@
-import { Menu } from '../../../icons/src/index'
+import { Menu } from '../icons/index'
 
 type MenuButtonProps = {
     setDropDownVisibility: (visibility: boolean) => void

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import Context from '../../../../../src/context/context'
-import { SortRadioButton } from '../../../Buttons/SortRadioButton'
-import { Stage } from '../../../../enums/stage'
+import Context from '../../../src/context/context'
+import { SortRadioButton } from '../Buttons/SortRadioButton'
+import { Stage } from '../../enums/stage'
 
 export const SortRadioButtonsProvider = () => {
     const contextValue = useContext(Context) || {

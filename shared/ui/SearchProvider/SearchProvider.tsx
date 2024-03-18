@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import Context from '../../../../../src/context/context'
-import SearchBox from '../../../SearchBox/src/components/SearchBox'
-import SortDateButtonProvider from '../../../SortDate/src/components/SortDateButtonProvider'
+import Context from '../../../src/context/context'
+import SearchBox from '../SearchBox/SearchBox'
+import SortDateButtonProvider from '../SortDate/SortDateButtonProvider'
 
 export const SearchProvider = () => {
     const { localTable, setCurrentTable } = useContext(Context)!

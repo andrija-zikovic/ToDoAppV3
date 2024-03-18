@@ -1,5 +1,5 @@
-import { DateDown, DateUp } from '../../../icons/src/index'
-import { SortStage } from '../../../../enums/stage'
+import { DateDown, DateUp } from '../icons/index'
+import { SortStage } from '../../enums/stage'
 
 type MobileButtonProps = {
     sortValue: string

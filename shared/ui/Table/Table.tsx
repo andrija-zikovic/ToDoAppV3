@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import Context from '../../../../../src/context/context'
-import ToDoCard from '../../../ToDoCard/src/components/ToDoCard'
+import Context from '../../../src/context/context'
+import ToDoCard from '../ToDoCard/src/components/ToDoCard'
 import { Link } from 'react-router-dom'
 
 const Table = () => {

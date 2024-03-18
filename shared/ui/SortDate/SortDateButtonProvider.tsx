@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { MobileButton } from './MobileButton'
-import { SortStage } from '../../../../enums/stage'
-import Context from '../../../../../src/context/context'
+import { SortStage } from '../../enums/stage'
+import Context from '../../../src/context/context'
 
 export const SortDateButtonProvider = () => {
     const { currentTable, setCurrentTable } = useContext(Context)!
