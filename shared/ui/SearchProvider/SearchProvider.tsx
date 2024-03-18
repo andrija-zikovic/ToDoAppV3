@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Context from '../../../src/context/context'
+import Context from '../../../src/context/todoContext'
 import SearchBox from '../SearchBox/SearchBox'
 import SortDateButtonProvider from '../SortDate/SortDateButtonProvider'
 

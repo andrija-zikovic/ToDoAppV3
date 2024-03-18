@@ -7,7 +7,7 @@ import InfoMessageBox from '../../shared/ui/InfoMessagesBox/InfoMessagesBox'
 
 export const MainRouter = () => {
     return (
-        <>
+        <div className="min-h-dvh overflow-hidden dark:bg-gray-700 dark:text-orange-200">
             <HeaderComponent />
             <Routes>
                 <Route path="/*" element={<ListScreen />} />
@@ -15,6 +15,6 @@ export const MainRouter = () => {
                 <Route path="/todo/edit/:id" element={<EditScreen />} />
             </Routes>
             <InfoMessageBox />
-        </>
+        </div>
     )
 }

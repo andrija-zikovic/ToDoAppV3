@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import Context from '../context/context'
+import Context from '../context/todoContext'
 import { useNavigate } from 'react-router'
 import TextInput from '../../shared/ui/Inputs/Input'
 import SubmitButton from '../../shared/ui/Buttons/SubmitButton'

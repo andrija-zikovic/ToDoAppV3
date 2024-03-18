@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Context from '../../../src/context/context'
+import Context from '../../../src/context/todoContext'
 import { SortRadioButton } from '../Buttons/SortRadioButton'
 import { Stage } from '../../enums/stage'
 

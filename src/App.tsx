@@ -1,13 +1,14 @@
 import { MainRouter } from './router/MainRouter'
-import { ContextProvider } from './context/context'
+import { TodoContextProvider } from './context/todoContext'
+import { MessageContextProvider } from './context/messageContext'
 
 function App() {
     return (
-        <div className="h-full w-full min-h-dvh overflow-hidden flex flex-col justify-start items-center dark:bg-gray-700 dark:text-orange-200 lg:relative">
-            <ContextProvider>
+        <MessageContextProvider>
+            <TodoContextProvider>
                 <MainRouter />
-            </ContextProvider>
-        </div>
+            </TodoContextProvider>
+        </MessageContextProvider>
     )
 }
 

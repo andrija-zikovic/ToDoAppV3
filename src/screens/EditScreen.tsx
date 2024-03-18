@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import Context from '../context/context'
+import Context from '../context/todoContext'
 import TextInput from '../../shared/ui/Inputs/Input'
 import SelectInput from '../../shared/ui/Selects/Select'
 import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
