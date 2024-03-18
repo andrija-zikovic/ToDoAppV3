@@ -5,7 +5,7 @@ import InfoMessage from './InfoMessage'
 const InfoMessagesBox = () => {
     const { infoMessages } = useContext(MessageContext)!
     return (
-        <div className=" fixed flex items-end w-full p-2 bottom-0 gap-2">
+        <div className="fixed flex justify-end w-full p-2 bottom-0 gap-2">
             {infoMessages.map((item, index) => (
                 <InfoMessage
                     key={index}

@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react'
 import { localStorageWrapper } from '../storage/storage'
-import { TTodo } from '../../shared/types/types'
+import { TTodo } from '../types/types'
 
 type ContextProviderProps = {
     children: React.ReactNode

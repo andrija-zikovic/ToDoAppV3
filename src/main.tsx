@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.tsx'
-import './output.css'
+import './styles.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement).render(
     <React.StrictMode>

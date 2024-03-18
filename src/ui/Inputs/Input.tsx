@@ -29,7 +29,7 @@ const TextInput = ({
                 type="text"
                 name={name}
                 placeholder={placeholder}
-                value={value ? value : null}
+                value={value}
                 onChange={(e) => on_change(e.target.value)}
                 onFocus={(e) => {
                     setTimeout(

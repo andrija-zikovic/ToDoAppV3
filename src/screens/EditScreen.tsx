@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { useParams, useNavigate } from 'react-router'
-import { descriptionInputValidation } from '../../scripts/validation/validations'
-import { TTodo } from '../../shared/types/types'
+import { descriptionInputValidation } from '../validation/validations'
+import { TTodo } from '../types/types'
 import { localStorageWrapper } from '../storage/storage'
 import TodoContext from '../context/todoContext'
 import MessageContext from '../context/messageContext'
-import TextInput from '../../shared/ui/Inputs/Input'
-import SelectInput from '../../shared/ui/Selects/Select'
-import SubmitButton from '../../shared/ui/Buttons/SubmitButton'
-import PopupWindow from '../../shared/ui/PopupWindow/PopupWindow'
+import TextInput from '../ui/Inputs/Input'
+import SelectInput from '../ui/Selects/Select'
+import SubmitButton from '../ui/Buttons/SubmitButton'
+import PopupWindow from '../ui/PopupWindow/PopupWindow'
 
 const EditScreen = () => {
     const navigate = useNavigate()
@@ -130,7 +130,7 @@ const EditScreen = () => {
             {deleteMessage && (
                 <PopupWindow
                     children={
-                        <div className="w-3/4 flex flex-col justify-center items-center p-4 rounded-md gap-3 border-2 border-gray-700 bg-orange-200">
+                        <div className=" w-80 flex flex-col justify-center items-center p-4 rounded-md gap-3 border-2 border-gray-700 bg-orange-200">
                             <p className=" font-bold">Delete To do!</p>
                             <p>Are you sure?</p>
                             <div className="flex flex-row justify-evenly items-center gap-2 w-full">

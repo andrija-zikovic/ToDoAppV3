@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
-import { TInfoMessage } from '../../shared/types/types'
+import { TInfoMessage } from '../types/types'
 
 type ContextProviderProps = {
     children: React.ReactNode
