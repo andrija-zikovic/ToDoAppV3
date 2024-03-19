@@ -1,49 +1,47 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import TodoContext from '../context/todoContext'
-import { Stage, SortStage, TSortStage } from '../enums/stage'
+import { Stage, TSortStage } from '../enums/stage'
+import { localStorageWrapper } from '../storage/storage'
+import { TTodo } from '../types/types'
 
 export const useTodoList = () => {
-    const { currentTable, setCurrentTable, localTable } =
-        useContext(TodoContext)!
-
     const sortByStage = (stage: string) => {
+        const localTable = localStorageWrapper.getItem('toDos')
         if (stage === Stage.ALL) {
-            setCurrentTable(localTable)
-            return
+            return localTable
         }
 
-        setCurrentTable(localTable.filter((todo) => todo.stage === stage))
+        return localTable.filter((todo: TTodo) => todo.stage === stage)
     }
 
     const handleSearch = (value: string) => {
+        const localTable = localStorageWrapper.getItem('toDos')
         if (value === '') {
-            setCurrentTable(localTable)
-            return
+            return localTable
         }
 
-        const filteredTable = localTable.filter((todo) =>
+        const filteredTable = localTable.filter((todo: TTodo) =>
             todo.description.toLowerCase().includes(value.toLowerCase())
         )
 
-        setCurrentTable(filteredTable)
+        return filteredTable
     }
 
-    const [sort, setSort] = useState<TSortStage>(SortStage.OLDEST)
+    const { currentTable } = useContext(TodoContext)!
 
-    const handleSort = () => {
+    const handleSort = (sort: TSortStage) => {
         if (sort === 'newest') {
             const newTable = [...currentTable].sort(
                 (a, b) => b.created_at - a.created_at
             )
-            setCurrentTable(newTable)
-            setSort(SortStage.OLDEST)
+            return newTable
         } else {
-            setCurrentTable(
-                [...currentTable].sort((a, b) => a.created_at - b.created_at)
+            const newTable = [...currentTable].sort(
+                (a, b) => a.created_at - b.created_at
             )
-            setSort(SortStage.NEWEST)
+            return newTable
         }
     }
 
-    return { currentTable, sortByStage, handleSearch, handleSort, sort }
+    return { currentTable, sortByStage, handleSearch, handleSort }
 }

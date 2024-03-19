@@ -3,32 +3,32 @@ import { useNavigate } from 'react-router-dom'
 import { localStorageWrapper } from '../storage/storage'
 import { descriptionInputValidation } from '../validation/validations'
 import { Stage } from '../enums/stage'
-import { TInfoMessage, TTodo } from '../types/types'
-import TodoContext from '../context/todoContext'
-import MessageContext from '../context/messageContext'
+import {
+    TInfoMessage,
+    TTodo,
+    TCreateFormData,
+    TUpdateFormData,
+} from '../types/types'
+// import TodoContext from '../context/todoContext'
+// import MessageContext from '../context/messageContext'
 import dayjs from 'dayjs'
 
-export const useTodo = (id?: string) => {
-    const { infoMessages, setInfoMessages } = useContext(MessageContext)!
-    const { setCurrentTable, localTable } = useContext(TodoContext)!
+export const useTodo = () => {
+    // const { infoMessages, setInfoMessages } = useContext(MessageContext)!
+    // const { setCurrentTable, localTable } = useContext(TodoContext)!
+    // const [description, setDescription] = useState(item ? item.description : '')
+    // const [stage, setStage] = useState(item ? item.stage : '')
+    // const [message, setMessage] = useState('')
+    // const [isLoading, setIsLoading] = useState(false)
 
-    const item = localTable.find((item) => item.id.toString() === id) as TTodo
+    const createTodo = ({ description }: TCreateFormData) => {
+        // setIsLoading(true)
+        // const validation = descriptionInputValidation(description)
 
-    const [description, setDescription] = useState(item ? item.description : '')
-    const [stage, setStage] = useState(item ? item.stage : '')
-    const [message, setMessage] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
-
-    const navigate = useNavigate()
-
-    const createTodo = () => {
-        setIsLoading(true)
-        const validation = descriptionInputValidation(description)
-
-        if (validation) {
-            setMessage(validation)
-            return
-        }
+        // if (validation) {
+        //     setMessage(validation)
+        //     return
+        // }
 
         try {
             const storedTodos = localStorageWrapper.getItem('toDos') || []
@@ -46,85 +46,94 @@ export const useTodo = (id?: string) => {
 
             localStorageWrapper.setItem('toDos', updatedTodos)
 
-            setCurrentTable(updatedTodos)
+            // setCurrentTable(updatedTodos)
 
-            setInfoMessages([
-                ...infoMessages,
-                { message: 'ToDo created', type: 'success' } as TInfoMessage,
-            ])
-            navigate('/')
+            //  setInfoMessages([
+            //     ...infoMessages,
+            //     { message: 'ToDo created', type: 'success' } as TInfoMessage,
+            // ])
+            // navigate('/')
         } catch (error) {
-            setInfoMessages([
-                ...infoMessages,
-                {
-                    message: 'Error creating ToDo',
-                    type: 'error',
-                } as TInfoMessage,
-            ])
+            return error
         }
-        setIsLoading(false)
     }
 
-    const updateTodo = (id: string) => {
-        setIsLoading(true)
-        const item = localTable.find(
-            (item) => item.id.toString() === id
-        ) as TTodo
-
-        const validation = descriptionInputValidation(description)
-
-        if (validation) {
-            console.log(validation)
-            setMessage(validation)
+    const updateTodo = ({ id, description, stage }: TUpdateFormData) => {
+        const storage = localStorageWrapper.getItem('toDos') || []
+        if (storage.length === 0) {
             return
         }
+        const item = storage.find(
+            (item: TTodo) => item.id.toString() === id
+        ) satisfies TTodo
+
+        // setIsLoading(true)
+        // const item = localTable.find(
+        //     (item) => item.id.toString() === id
+        // ) as TTodo
+
+        // const validation = descriptionInputValidation(description)
+
+        // if (validation) {
+        //     console.log(validation)
+        //     setMessage(validation)
+        //     return
+        // }
 
         try {
             item.description = description
 
             item.stage = stage
 
-            localStorageWrapper.setItem('toDos', localTable)
+            localStorageWrapper.setItem('toDos', storage)
 
-            setCurrentTable(localTable)
+            // setCurrentTable(localTable)
 
-            navigate('/')
+            // navigate('/')
         } catch (error) {
-            console.error(error)
-            setInfoMessages([
-                { message: 'Error updating To do!', type: 'error' },
-            ])
+            return error
+            // console.error(error)
+            // setInfoMessages([
+            //     { message: 'Error updating To do!', type: 'error' },
+            // ])
         }
-        setIsLoading(false)
+        // setIsLoading(false)
     }
 
     const deleteTodo = (id: string) => {
-        const item = localTable.find(
-            (item) => item.id.toString() === id
-        ) as TTodo
+        const storage = localStorageWrapper.getItem('toDos') || []
+
+        if (storage.length === 0) {
+            return
+        }
+
+        const item = storage.find(
+            (item: TTodo) => item.id.toString() === id
+        ) satisfies TTodo
+
         if (item.stage !== 'done') {
-            setInfoMessages([
-                {
-                    message: 'You can only delete To do that is "Done"!',
-                    type: 'error',
-                },
-            ])
             return
         }
 
         try {
-            localTable.splice(localTable.indexOf(item), 1)
-            localStorageWrapper.setItem('toDos', localTable)
+            const newStorage = storage.filter(
+                (item: TTodo) => item.id.toString() !== id
+            )
 
-            setCurrentTable(localTable)
+            localStorageWrapper.setItem('toDos', newStorage)
+            // localTable.splice(localTable.indexOf(item), 1)
+            // localStorageWrapper.setItem('toDos', localTable)
 
-            setInfoMessages([{ message: 'To do deleted!', type: 'success' }])
+            // setCurrentTable(localTable)
 
-            navigate('/')
+            // setInfoMessages([{ message: 'To do deleted!', type: 'success' }])
+
+            // navigate('/')
         } catch (error) {
-            setInfoMessages([
-                { message: 'Error deleting To do!', type: 'error' },
-            ])
+            return error
+            // setInfoMessages([
+            //     { message: 'Error deleting To do!', type: 'error' },
+            // ])
         }
     }
 
@@ -132,12 +141,12 @@ export const useTodo = (id?: string) => {
         createTodo,
         updateTodo,
         deleteTodo,
-        description,
-        setDescription,
-        setStage,
-        stage,
-        message,
-        setMessage,
-        isLoading,
+        // description,
+        // setDescription,
+        // setStage,
+        // stage,
+        // message,
+        // setMessage,
+        // isLoading,
     }
 }

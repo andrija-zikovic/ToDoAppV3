@@ -10,4 +10,14 @@ type TInfoMessage = {
     type: 'default' | 'error' | 'success'
 }
 
-export type { TTodo, TInfoMessage }
+type TCreateFormData = {
+    description: string
+}
+
+type TUpdateFormData = {
+    id: string
+    description?: string
+    stage?: string
+}
+
+export type { TTodo, TInfoMessage, TCreateFormData, TUpdateFormData }
