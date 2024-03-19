@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useSearchParams } from 'react-router-dom'
 import TodoForm from '../ui/Forms/TodoForm'
 import { Form } from '../enums/form'
@@ -8,7 +8,7 @@ const EditScreen = () => {
     const [searchParams] = useSearchParams()
 
     const initData = {
-        id: searchParams.get('id')!,
+        id: useParams().id!,
         description: searchParams.get('description')!,
         stage: searchParams.get('stage')!,
         created_at: Number(searchParams.get('created_at')!),
@@ -20,10 +20,11 @@ const EditScreen = () => {
                 onClick={() => {
                     navigate(-1)
                 }}
-                className="dark:border-orange-200"
+                className="dark:border-orange-200 fixed top-20 left-2 md:top-32"
             >
                 Back
             </button>
+            <h1 className="text-4xl p-2 mt-28">Edit ToDo</h1>
             <TodoForm
                 initData={initData}
                 onDelete={true}

@@ -11,7 +11,7 @@ const CreateScreen = () => {
                 onClick={() => {
                     navigate('/')
                 }}
-                className="dark:border-orange-200"
+                className="dark:border-orange-200 fixed top-20 left-2 md:top-32"
             >
                 Back
             </button>

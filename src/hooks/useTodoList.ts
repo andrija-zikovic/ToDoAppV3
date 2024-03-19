@@ -5,41 +5,48 @@ import { localStorageWrapper } from '../storage/storage'
 import { TTodo } from '../types/types'
 
 export const useTodoList = () => {
+    const { currentTable, setCurrentTable } = useContext(TodoContext)!
+
     const sortByStage = (stage: string) => {
         const localTable = localStorageWrapper.getItem('toDos')
+
         if (stage === Stage.ALL) {
-            return localTable
+            setCurrentTable(localTable)
+            return
         }
 
-        return localTable.filter((todo: TTodo) => todo.stage === stage)
+        const filteredTable = localTable.filter(
+            (todo: TTodo) => todo.stage === stage
+        )
+
+        setCurrentTable(filteredTable)
     }
 
     const handleSearch = (value: string) => {
         const localTable = localStorageWrapper.getItem('toDos')
         if (value === '') {
-            return localTable
+            setCurrentTable(localTable)
+            return
         }
 
         const filteredTable = localTable.filter((todo: TTodo) =>
             todo.description.toLowerCase().includes(value.toLowerCase())
         )
 
-        return filteredTable
+        setCurrentTable(filteredTable)
     }
-
-    const { currentTable } = useContext(TodoContext)!
 
     const handleSort = (sort: TSortStage) => {
         if (sort === 'newest') {
             const newTable = [...currentTable].sort(
                 (a, b) => b.created_at - a.created_at
             )
-            return newTable
+            setCurrentTable(newTable)
         } else {
             const newTable = [...currentTable].sort(
                 (a, b) => a.created_at - b.created_at
             )
-            return newTable
+            setCurrentTable(newTable)
         }
     }
 

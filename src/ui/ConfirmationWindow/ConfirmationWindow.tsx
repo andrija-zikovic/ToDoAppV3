@@ -13,14 +13,16 @@ const ConfirmationWindow = (props: IProps) => {
                 <p>{props.message}</p>
                 <p>{props.message2}</p>
                 <p>{props.message3}</p>
-                <div className="flex justify-between gap-4">
+                <div className="flex justify-around gap-4">
                     <button
+                        type="button"
                         onClick={props.onConfirm}
                         className="bg-green-400 p-2 rounded-md"
                     >
                         Yes
                     </button>
                     <button
+                        type="button"
                         onClick={props.onCancel}
                         className="bg-red-400 p-2 rounded-md"
                     >

@@ -1,6 +1,8 @@
 import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTodo } from '../../hooks/useTodo'
 import MessageContext from '../../context/messageContext'
+import TodoContext from '../../context/todoContext'
 import { TTodo } from '../../types/types'
 import { descriptionInputValidation } from '../../validation/descriptionInputValidation'
 import { TForm, Form } from '../../enums/form'
@@ -22,10 +24,16 @@ type IForm = {
 
 const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
     const { setInfoMessages } = useContext(MessageContext)!
+    const { setRefetchStorage } = useContext(TodoContext)!
     const { createTodo, updateTodo, deleteTodo } = useTodo()
+    const navigate = useNavigate()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [isDeleting, setIsDeleting] = useState(false)
+
+    const refetch = () => {
+        setRefetchStorage((prev) => !prev)
+    }
 
     const handleSubmitCreate = ({ event }: IForm) => {
         event.preventDefault()
@@ -50,6 +58,8 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
 
         setInfoMessages([{ message: 'Todo created', type: 'success' }])
         setIsSubmitting(false)
+        refetch()
+        navigate('/')
     }
 
     const handleSubmitUpdate = ({ event }: IForm) => {
@@ -60,8 +70,8 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
 
         const description = formData.get('description') as string | ''
         const stage = formData.get('stage') as string | ''
-
         const descCheck = descriptionInputValidation(description)
+
         if (descCheck) {
             setErrorMessage(descCheck)
             setIsSubmitting(false)
@@ -81,6 +91,8 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
 
         setInfoMessages([{ message: 'Todo updated', type: 'success' }])
         setIsSubmitting(false)
+        refetch()
+        navigate('/')
     }
 
     const handleSubmit = ({ event }: IForm) => {
@@ -94,11 +106,14 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
     const handleDelete = () => {
         const del = deleteTodo(initData!.id)
         if (del) {
+            console.log(del)
             setInfoMessages([{ message: 'Error deleting Todo', type: 'error' }])
             return
         }
 
         setInfoMessages([{ message: 'Todo deleted', type: 'success' }])
+        refetch()
+        navigate('/')
     }
 
     const handleCancel = () => {
@@ -126,15 +141,16 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
                     <SelectInput
                         label="Stage Change"
                         name="stage"
-                        value={initData ? initData.stage : 'default'}
+                        value={initData!.stage}
                     />
                 )}
             </div>
             <SubmitButton isLoading={isSubmitting} />
             {onDelete && (
                 <button
+                    type="button"
                     onClick={() => setIsDeleting(true)}
-                    className="w-auto h-12 p-2 border-2 border-red-600 rounded-md text-red-600 bg-orange-200 transition-all duration-300 ease-in-out"
+                    className=" border-gray-700 rounded-md bg-red-300 transition-all duration-300 ease-in-out fixed top-20 right-2 md:top-32"
                 >
                     Delete
                 </button>
