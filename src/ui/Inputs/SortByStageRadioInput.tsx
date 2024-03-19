@@ -1,16 +1,14 @@
-import React from 'react'
-
 type RadioInputProps = {
     title: string
     stage: string
     sortStageBy: (stage: string) => void
 }
 
-export const SortByStageRadioInput: React.FC<RadioInputProps> = ({
+export const SortByStageRadioInput = ({
     title,
     stage,
     sortStageBy,
-}) => {
+}: RadioInputProps) => {
     return (
         <div className="flex flex-row justify-start items-center whitespace-nowrap gap-2 px-6 py-1 h-auto md:px-2">
             <label

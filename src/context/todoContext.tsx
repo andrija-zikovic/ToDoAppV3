@@ -2,7 +2,7 @@ import { createContext, useState } from 'react'
 import { localStorageWrapper } from '../storage/storage'
 import { TTodo } from '../types/types'
 
-type ContextProviderProps = {
+type IProps = {
     children: React.ReactNode
 }
 
@@ -14,7 +14,7 @@ interface ContextValues {
 
 const TodoContext = createContext<null | ContextValues>(null)
 
-export const TodoContextProvider = ({ children }: ContextProviderProps) => {
+export const TodoContextProvider = ({ children }: IProps) => {
     const localTable = localStorageWrapper.getItem<TTodo[]>('toDos') || []
     const [currentTable, setCurrentTable] = useState(localTable)
 
@@ -22,7 +22,7 @@ export const TodoContextProvider = ({ children }: ContextProviderProps) => {
         currentTable,
         setCurrentTable,
         localTable,
-    } as ContextValues
+    }
 
     return (
         <TodoContext.Provider value={contextValues}>

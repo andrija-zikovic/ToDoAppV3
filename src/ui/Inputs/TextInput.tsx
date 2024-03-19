@@ -24,31 +24,33 @@ const TextInput = ({
 
     return (
         <div className="flex flex-col justify-center items-center gap-2 text-xl">
-            <label>{label}</label>
-            <input
-                type="text"
-                name={name}
-                placeholder={placeholder}
-                value={value}
-                onChange={(e) => on_change(e.target.value)}
-                onFocus={(e) => {
-                    setTimeout(
-                        () =>
-                            e.target.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'center',
-                                inline: 'nearest',
-                            }),
-                        150
-                    )
-                }}
-                className={`
+            <label className="flex flex-col justify-center items-center gap-2">
+                {label}
+                <input
+                    type="text"
+                    name={name}
+                    placeholder={placeholder}
+                    value={value}
+                    onChange={(e) => on_change(e.target.value)}
+                    onFocus={(e) => {
+                        setTimeout(
+                            () =>
+                                e.target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'center',
+                                    inline: 'nearest',
+                                }),
+                            150
+                        )
+                    }}
+                    className={`
                 w-auto h-12 p-2 text-gray-950 
                 border-2 rounded-md 
                 transition-all duration-300 ease-in-out 
                 ${bg_color}`}
-                required={required}
-            />
+                    required={required}
+                />
+            </label>
         </div>
     )
 }
