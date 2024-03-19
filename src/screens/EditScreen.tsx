@@ -44,7 +44,7 @@ const EditScreen = () => {
                 }}
                 onDelete={() => setDeleteMessage(true)}
                 onSubmit={() => todo.updateTodo(id)}
-                isSubmitting={false}
+                isSubmitting={todo.isLoading}
                 onChangeDsc={todo.setDescription}
                 onChangeStg={todo.setStage}
                 errorMessage={todo.message}

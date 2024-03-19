@@ -17,10 +17,12 @@ export const useTodo = (id?: string) => {
     const [description, setDescription] = useState(item ? item.description : '')
     const [stage, setStage] = useState(item ? item.stage : '')
     const [message, setMessage] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()
 
     const createTodo = () => {
+        setIsLoading(true)
         const validation = descriptionInputValidation(description)
 
         if (validation) {
@@ -60,10 +62,11 @@ export const useTodo = (id?: string) => {
                 } as TInfoMessage,
             ])
         }
+        setIsLoading(false)
     }
 
     const updateTodo = (id: string) => {
-        console.log('UPDATE')
+        setIsLoading(true)
         const item = localTable.find(
             (item) => item.id.toString() === id
         ) as TTodo
@@ -92,6 +95,7 @@ export const useTodo = (id?: string) => {
                 { message: 'Error updating To do!', type: 'error' },
             ])
         }
+        setIsLoading(false)
     }
 
     const deleteTodo = (id: string) => {
@@ -122,7 +126,6 @@ export const useTodo = (id?: string) => {
                 { message: 'Error deleting To do!', type: 'error' },
             ])
         }
-        console.log('Deleting todo:', id)
     }
 
     return {
@@ -135,5 +138,6 @@ export const useTodo = (id?: string) => {
         stage,
         message,
         setMessage,
+        isLoading,
     }
 }

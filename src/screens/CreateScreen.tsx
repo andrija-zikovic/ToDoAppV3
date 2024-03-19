@@ -23,7 +23,7 @@ const CreateScreen = () => {
             <h1 className="text-4xl p-2 mt-28">Create ToDo</h1>
             <TodoForm
                 onSubmit={todo.createTodo}
-                isSubmitting={false}
+                isSubmitting={todo.isLoading}
                 onChangeDsc={todo.setDescription}
                 errorMessage={todo.message}
             />
