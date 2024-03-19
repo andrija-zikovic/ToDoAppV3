@@ -43,5 +43,5 @@ export const useTodoList = () => {
         }
     }
 
-    return { currentTable, sortByStage, handleSearch, handleSort }
+    return { sortByStage, handleSearch, handleSort }
 }

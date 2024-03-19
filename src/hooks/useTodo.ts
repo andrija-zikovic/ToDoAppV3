@@ -1,12 +1,11 @@
-import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useState, useContext } from 'react'
+// import { useNavigate } from 'react-router-dom'
 import { localStorageWrapper } from '../storage/storage'
-import { descriptionInputValidation } from '../validation/validations'
+// import { descriptionInputValidation } from '../validation/validations'
 import { Stage } from '../enums/stage'
 import {
-    TInfoMessage,
+    // TInfoMessage,
     TTodo,
-    TCreateFormData,
     TUpdateFormData,
 } from '../types/types'
 // import TodoContext from '../context/todoContext'
@@ -21,7 +20,7 @@ export const useTodo = () => {
     // const [message, setMessage] = useState('')
     // const [isLoading, setIsLoading] = useState(false)
 
-    const createTodo = ({ description }: TCreateFormData) => {
+    const createTodo = (description: string) => {
         // setIsLoading(true)
         // const validation = descriptionInputValidation(description)
 
