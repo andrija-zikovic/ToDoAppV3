@@ -31,7 +31,7 @@ const CreateScreen = () => {
     }
 
     return (
-        <div className="w-full inset-0 flex flex-col justify-start items-center gap-2">
+        <div className="inset-0 flex flex-col justify-start items-center gap-2">
             <button
                 onClick={() => {
                     navigate('/')

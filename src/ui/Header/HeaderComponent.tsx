@@ -27,7 +27,7 @@ export const HeaderComponent = () => {
                     setDropDownVisibility={setDropDownVisibility}
                     dropDownVisibility={dropDownVisibility}
                 />
-                <div className="hidden md:flex flex-row justify-end items-center h-full w-full">
+                <div className="hidden md:flex flex-row justify-end items-center h-full">
                     {dropDownPath.map((item) => (
                         <Link
                             to={item.path}

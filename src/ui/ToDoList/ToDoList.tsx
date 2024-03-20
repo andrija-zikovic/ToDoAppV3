@@ -8,7 +8,7 @@ const ToDoList = () => {
     return (
         <div
             id="ToDosTable"
-            className=" inset-0 flex flex-col justify-start items-center gap-2 p-2 overflow-scroll"
+            className="inset-0 flex flex-col justify-start items-center gap-2 p-2 overflow-scroll"
         >
             {toDoList.length <= 0 ? (
                 <div className="w-full text-2xl min-h-80 text-center">
