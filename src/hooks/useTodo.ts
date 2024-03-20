@@ -85,6 +85,7 @@ export const useTodo = () => {
             )
 
             localStorageWrapper.setItem('toDos', newStorage)
+
             refetchToDoList()
             navigate('/')
             setInfoMessages({ message: 'Todo deleted', type: 'success' })
