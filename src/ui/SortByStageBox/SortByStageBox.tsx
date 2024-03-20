@@ -2,7 +2,7 @@ import SortByStageRadioInput from '../Inputs/SortByStageRadioInput'
 import { Stage } from '../../enums/stage'
 import { useTodoList } from '../../hooks/useTodoList'
 
-export const SortRadioInputProvider = () => {
+export const SortByStageBox = () => {
     const sort = useTodoList()
 
     return (
@@ -31,4 +31,4 @@ export const SortRadioInputProvider = () => {
     )
 }
 
-export default SortRadioInputProvider
+export default SortByStageBox

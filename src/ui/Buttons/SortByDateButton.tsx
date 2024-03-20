@@ -6,6 +6,7 @@ import { useTodoList } from '../../hooks/useTodoList'
 export const SortByDateButton = () => {
     const [sort, setSort] = useState<TSortStage>(SortStage.OLDEST)
     const { handleSort } = useTodoList()
+
     const handleClick = () => {
         handleSort(sort)
         setSort((prev) =>

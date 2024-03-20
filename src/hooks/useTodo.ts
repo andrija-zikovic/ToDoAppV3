@@ -3,6 +3,14 @@ import { Stage } from '../enums/stage'
 import { TTodo, TUpdateFormData } from '../types/types'
 import dayjs from 'dayjs'
 
+const getValidStorage = () => {
+    const storage = localStorageWrapper.getItem('toDos')
+    if (storage === null) {
+        return { message: 'No todos found', type: 'error' }
+    }
+    return storage
+}
+
 export const useTodo = () => {
     const createTodo = (description: string) => {
         try {
@@ -26,10 +34,11 @@ export const useTodo = () => {
     }
 
     const updateTodo = ({ id, description, stage }: TUpdateFormData) => {
-        const storage = localStorageWrapper.getItem('toDos') || []
-        if (storage.length === 0) {
-            return
+        const storage = getValidStorage()
+        if (storage.message) {
+            return storage
         }
+
         const item = storage.find(
             (item: TTodo) => item.id.toString() === id
         ) satisfies TTodo
@@ -41,15 +50,15 @@ export const useTodo = () => {
 
             localStorageWrapper.setItem('toDos', storage)
         } catch (error) {
-            return error
+            console.error(error)
+            return { message: 'Error updating todo', type: 'error' }
         }
     }
 
     const deleteTodo = (id: string) => {
-        const storage = localStorageWrapper.getItem('toDos') || []
-
-        if (storage.length === 0) {
-            return
+        const storage = getValidStorage()
+        if (storage.message) {
+            return storage
         }
 
         const item = storage.find(
@@ -57,7 +66,7 @@ export const useTodo = () => {
         ) satisfies TTodo
 
         if (item.stage !== 'done') {
-            return
+            return { message: 'You can only delete done todos', type: 'error' }
         }
 
         try {
@@ -67,7 +76,8 @@ export const useTodo = () => {
 
             localStorageWrapper.setItem('toDos', newStorage)
         } catch (error) {
-            return error
+            console.error(error)
+            return { message: 'Error deleting todo', type: 'error' }
         }
     }
 

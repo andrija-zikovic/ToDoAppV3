@@ -6,19 +6,24 @@ type IProps = {
 }
 
 interface ContextValues {
-    infoMessages: TInfoMessage[]
-    setInfoMessages: React.Dispatch<React.SetStateAction<TInfoMessage[]>>
+    infoMessages: TInfoMessage
+    setInfoMessages: React.Dispatch<React.SetStateAction<TInfoMessage>>
 }
 
 const MessageContext = createContext<null | ContextValues>(null)
 
 export const MessageContextProvider = ({ children }: IProps) => {
-    const [infoMessages, setInfoMessages] = useState([] as TInfoMessage[])
+    const [infoMessages, setInfoMessages] = useState<TInfoMessage>(
+        {} as TInfoMessage
+    )
 
     useEffect(() => {
-        setTimeout(() => {
-            setInfoMessages((prev) => prev.slice(1))
-        }, 4000)
+        if (infoMessages.message) {
+            const timer = setTimeout(() => {
+                setInfoMessages({} as TInfoMessage)
+            }, 3000)
+            return () => clearTimeout(timer)
+        }
     }, [infoMessages])
 
     const contextValues = {

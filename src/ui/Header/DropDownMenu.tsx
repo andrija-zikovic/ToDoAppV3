@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-type DropDownMenuProps = {
+type IProps = {
     setDropDownVisibility: (visibility: boolean) => void
     dropDownPath: {
         path: string
@@ -11,7 +11,7 @@ type DropDownMenuProps = {
 export const DropDownMenu = ({
     setDropDownVisibility,
     dropDownPath,
-}: DropDownMenuProps) => {
+}: IProps) => {
     return (
         <div className="absolute top-16 z-10 w-full h-auto bg-gray-700 flex flex-col justify-center items-center gap-2 px-2 py-4 border-b-2 border-orange-200 text-3xl">
             {dropDownPath.map((item) => (

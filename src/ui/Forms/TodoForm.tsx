@@ -9,7 +9,7 @@ import { TForm, Form } from '../../enums/form'
 import TextInput from '../Inputs/TextInput'
 import SubmitButton from '../Buttons/SubmitButton'
 import SelectInput from '../Inputs/SelectInput'
-import ConfirmationWindow from '../ConfirmationWindow/ConfirmationWindow'
+import DeleteConfirmationWindow from '../DeleteConfirmationWindow/DeleteConfirmationWindow'
 import Overlay from '../Overlay/Overlay'
 
 type IProps = {
@@ -23,13 +23,16 @@ type IForm = {
 }
 
 const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
-    const { setInfoMessages } = useContext(MessageContext)!
-    const { setRefetchStorage } = useContext(TodoContext)!
-    const { createTodo, updateTodo, deleteTodo } = useTodo()
-    const navigate = useNavigate()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const [isDeleting, setIsDeleting] = useState(false)
+
+    const { setInfoMessages } = useContext(MessageContext)!
+    const { setRefetchStorage } = useContext(TodoContext)!
+
+    const { createTodo, updateTodo, deleteTodo } = useTodo()
+
+    const navigate = useNavigate()
 
     const refetch = () => {
         setRefetchStorage((prev) => !prev)
@@ -51,13 +54,15 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
         }
 
         const create = createTodo(description)
+
         if (create) {
-            setInfoMessages([{ message: 'Error creating Todo', type: 'error' }])
+            setInfoMessages(create as any)
             return
         }
 
-        setInfoMessages([{ message: 'Todo created', type: 'success' }])
+        setInfoMessages({ message: 'Todo created', type: 'success' })
         setIsSubmitting(false)
+
         refetch()
         navigate('/')
     }
@@ -70,8 +75,8 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
 
         const description = formData.get('description') as string | ''
         const stage = formData.get('stage') as string | ''
-        const descCheck = descriptionInputValidation(description)
 
+        const descCheck = descriptionInputValidation(description)
         if (descCheck) {
             setErrorMessage(descCheck)
             setIsSubmitting(false)
@@ -83,14 +88,14 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
             description: description,
             stage: stage,
         })
-
         if (update) {
-            setInfoMessages([{ message: 'Error updating Todo', type: 'error' }])
+            setInfoMessages(update as any)
             return
         }
 
-        setInfoMessages([{ message: 'Todo updated', type: 'success' }])
+        setInfoMessages({ message: 'Todo updated', type: 'success' })
         setIsSubmitting(false)
+
         refetch()
         navigate('/')
     }
@@ -107,11 +112,12 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
         const del = deleteTodo(initData!.id)
         if (del) {
             console.log(del)
-            setInfoMessages([{ message: 'Error deleting Todo', type: 'error' }])
+            setInfoMessages(del as any)
             return
         }
 
-        setInfoMessages([{ message: 'Todo deleted', type: 'success' }])
+        setInfoMessages({ message: 'Todo deleted', type: 'success' })
+
         refetch()
         navigate('/')
     }
@@ -137,7 +143,7 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
                 <div className="text-red-600 absolute top-full text-center w-full">
                     <p>{errorMessage}</p>
                 </div>
-                {onSubmit === 'Update' && (
+                {onSubmit === Form.CREATE && (
                     <SelectInput
                         label="Stage Change"
                         name="stage"
@@ -145,7 +151,7 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
                     />
                 )}
             </div>
-            <SubmitButton isLoading={isSubmitting} />
+            <SubmitButton isSubmitting={isSubmitting} />
             {onDelete && (
                 <button
                     type="button"
@@ -157,7 +163,7 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
             )}
             {isDeleting && (
                 <Overlay>
-                    <ConfirmationWindow
+                    <DeleteConfirmationWindow
                         onConfirm={handleDelete}
                         onCancel={handleCancel}
                         message="Are you sure you want to delete this ToDo?"

@@ -1,9 +1,9 @@
 type IProps = {
-    isLoading: boolean
+    isSubmitting: boolean
 }
 
-const SubmitButton = ({ isLoading }: IProps) => {
-    const loadingStyle = isLoading ? 'pointer-events-none' : ''
+const SubmitButton = ({ isSubmitting }: IProps) => {
+    const loadingStyle = isSubmitting ? 'pointer-events-none' : ''
 
     return (
         <button

@@ -1,4 +1,4 @@
-type InputType = {
+type IProps = {
     label: string
     placeholder: string
     name: string
@@ -14,7 +14,7 @@ const TextInput = ({
     value,
     message,
     required,
-}: InputType) => {
+}: IProps) => {
     const bg_color =
         message?.length > 2
             ? 'bg-red-300 border-red-600'

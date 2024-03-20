@@ -7,25 +7,25 @@ type IProps = {
 }
 
 interface ContextValues {
-    currentTable: TTodo[]
-    setCurrentTable: React.Dispatch<React.SetStateAction<TTodo[]>>
+    toDoList: TTodo[]
+    setToDoList: React.Dispatch<React.SetStateAction<TTodo[]>>
     setRefetchStorage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const TodoContext = createContext<null | ContextValues>(null)
 
 export const TodoContextProvider = ({ children }: IProps) => {
-    const [currentTable, setCurrentTable] = useState([] as TTodo[])
+    const [toDoList, setToDoList] = useState([] as TTodo[])
     const [refetchStorage, setRefetchStorage] = useState(false)
 
     useEffect(() => {
         const localTable = localStorageWrapper.getItem<TTodo[]>('toDos') || []
-        setCurrentTable(localTable)
+        setToDoList(localTable)
     }, [refetchStorage])
 
     const contextValues = {
-        currentTable,
-        setCurrentTable,
+        toDoList,
+        setToDoList,
         setRefetchStorage,
     }
 

@@ -1,9 +1,9 @@
-type InfoMessageProps = {
+type IProps = {
     message: string
     type: 'error' | 'success'
 }
 
-const InfoMessage = ({ message, type }: InfoMessageProps) => {
+const InfoMessage = ({ message, type }: IProps) => {
     const status = {
         error: 'bg-red-200 border-red-600',
         success: 'bg-green-200',

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-type SelectType = {
+type IProps = {
     label: string
     value: string
     name: string
 }
 
-const SelectInput = ({ label, value, name }: SelectType) => {
+const SelectInput = ({ label, value, name }: IProps) => {
     const [stage, setStage] = useState<string>(value)
     return (
         <label className="flex flex-col justify-center items-center gap-2">

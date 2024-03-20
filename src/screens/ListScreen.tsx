@@ -1,7 +1,7 @@
-import SortRadioButtonsProvider from '../ui/SortRadioInputProvider/SortRadioInputProvider'
+import SortByStageBox from '../ui/SortByStageBox/SortByStageBox'
 import SearchBox from '../ui/SearchBox/SearchBox'
 import SortByDateButton from '../ui/Buttons/SortByDateButton'
-import Table from '../ui/Table/Table'
+import Table from '../ui/ToDoList/ToDoList'
 
 export default function ListScreen() {
     return (
@@ -11,7 +11,7 @@ export default function ListScreen() {
                     <SortByDateButton />
                     <SearchBox />
                 </div>
-                <SortRadioButtonsProvider />
+                <SortByStageBox />
             </div>
             <Table />
         </div>

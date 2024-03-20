@@ -6,13 +6,12 @@ const InfoMessagesBox = () => {
     const { infoMessages } = useContext(MessageContext)!
     return (
         <div className="fixed flex justify-end w-full p-2 bottom-0 gap-2">
-            {infoMessages.map((item, index) => (
+            {infoMessages.message && (
                 <InfoMessage
-                    key={index}
-                    message={item.message}
-                    type={item.type.includes('error') ? 'error' : 'success'}
+                    message={infoMessages.message}
+                    type={infoMessages.type === 'error' ? 'error' : 'success'}
                 />
-            ))}
+            )}
         </div>
     )
 }

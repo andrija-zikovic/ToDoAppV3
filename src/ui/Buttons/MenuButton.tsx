@@ -1,14 +1,11 @@
 import { Menu } from '../Icons/index'
 
-type MenuButtonProps = {
+type IProps = {
     setDropDownVisibility: (visibility: boolean) => void
     dropDownVisibility: boolean
 }
 
-const MenuButton = ({
-    setDropDownVisibility,
-    dropDownVisibility,
-}: MenuButtonProps) => {
+const MenuButton = ({ setDropDownVisibility, dropDownVisibility }: IProps) => {
     const toggleVisibility = () => {
         setDropDownVisibility(!dropDownVisibility)
     }
