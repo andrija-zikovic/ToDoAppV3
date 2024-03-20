@@ -22,7 +22,7 @@ const TodoForm = (props: IProps) => {
     return (
         <form
             onSubmit={(e) => props.onSubmit({ event: e })}
-            className="w-full h-full flex flex-col justify-center items-center p-2 gap-8"
+            className="inset-0 flex flex-col justify-center items-center p-2 gap-8"
         >
             <div className="relative flex flex-row justify-center items-center gap-6">
                 <TextInput
@@ -33,7 +33,7 @@ const TodoForm = (props: IProps) => {
                     message={props.errorMessage}
                     required={true}
                 />
-                <div className="text-red-600 absolute top-full text-center w-full">
+                <div className="text-red-600 absolute top-full text-center">
                     <p>{props.errorMessage}</p>
                 </div>
                 {props.submitType === Form.UPDATE && (

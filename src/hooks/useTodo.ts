@@ -33,6 +33,7 @@ export const useTodo = () => {
             navigate('/')
             setInfoMessages({ message: 'Todo created', type: 'success' })
         } catch (error) {
+            console.error(error)
             setInfoMessages({ message: 'Error creating todo', type: 'error' })
             return
         }
@@ -47,10 +48,10 @@ export const useTodo = () => {
 
         try {
             description ? (item.description = description) : null
-
             stage ? (item.stage = stage) : null
 
             localStorageWrapper.setItem('toDos', storage)
+
             setInfoMessages({ message: 'Todo updated', type: 'success' })
             refetchToDoList()
         } catch (error) {
@@ -70,9 +71,7 @@ export const useTodo = () => {
         if (!item) {
             setInfoMessages({ message: 'Todo not found', type: 'error' })
             return
-        }
-
-        if (item.stage !== 'done') {
+        } else if (item.stage !== 'done') {
             setInfoMessages({
                 message: 'Todo must be done to delete',
                 type: 'error',

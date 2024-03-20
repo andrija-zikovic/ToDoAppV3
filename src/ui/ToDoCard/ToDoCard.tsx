@@ -23,7 +23,7 @@ const ToDoCard = ({ item }: ToDoCardProps) => {
 
     return (
         <div
-            className={`relative w-full p-3 rounded-md text-2xl border-2 border-gray-400 text-center ${bg_color} hover:bg-orange-200 hover:border-gray-700 hover:text-gray-700 dark:text-gray-700 dark:${bg_color} md:max-w-2xl `}
+            className={`w-full relative p-3 rounded-md text-2xl border-2 border-gray-400 text-center ${bg_color} hover:bg-orange-200 hover:border-gray-700 hover:text-gray-700 md:max-w-2xl `}
         >
             <Link
                 to={`todo/edit/${item.id}?description=${item.description}&stage=${item.stage}&created_at=${item.created_at}`}

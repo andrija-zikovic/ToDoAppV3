@@ -7,7 +7,7 @@ import InfoMessageBox from '../ui/InfoMessagesBox/InfoMessagesBox'
 
 export const MainRouter = () => {
     return (
-        <div className="min-h-dvh overflow-hidden dark:bg-gray-700 dark:text-orange-200">
+        <div className="min-h-dvh overflow-hidden">
             <HeaderComponent />
             <Routes>
                 <Route path="/*" element={<ListScreen />} />

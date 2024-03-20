@@ -20,4 +20,8 @@ type TUpdateFormData = {
     stage?: string
 }
 
-export type { TTodo, TInfoMessage, TCreateFormData, TUpdateFormData }
+type IForm = {
+    event: React.FormEvent<HTMLFormElement>
+}
+
+export type { TTodo, TInfoMessage, TCreateFormData, TUpdateFormData, IForm }

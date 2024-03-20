@@ -22,7 +22,7 @@ const EditScreen = () => {
         created_at: Number(searchParams.get('created_at')!),
     }
 
-    const handleSubmitUpdate = ({ event }: IForm) => {
+    const handleSubmit = ({ event }: IForm) => {
         event.preventDefault()
         setIsSubmitting(true)
 
@@ -51,18 +51,18 @@ const EditScreen = () => {
     }
 
     return (
-        <div className="flex flex-col justify-evenly items-center p-2 w-full h-full min-h-96 relative">
+        <div className="inset-0 flex flex-col justify-evenly items-center p-2 relative">
             <button
                 onClick={() => {
                     navigate(-1)
                 }}
-                className="dark:border-orange-200 fixed top-20 left-2 md:top-32"
+                className="fixed top-20 left-2 md:top-32"
             >
                 Back
             </button>
             <h1 className="text-4xl p-2 mt-28">Edit ToDo</h1>
             <TodoForm
-                onSubmit={handleSubmitUpdate}
+                onSubmit={handleSubmit}
                 onDelete={handleDelete}
                 isSubmitting={isSubmitting}
                 initData={initData}

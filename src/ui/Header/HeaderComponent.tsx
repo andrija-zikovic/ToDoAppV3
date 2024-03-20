@@ -18,8 +18,8 @@ export const HeaderComponent = () => {
     ]
 
     return (
-        <div className="w-full bg-gray-700 border-b-1 border-gray-700 dark:border-b-2 dark:border-orange-200">
-            <div className="flex flex-row justify-between items-center max-w-full w-full text-center px-4 p-3 md:p-6 md:items-end md:flex-row-reverse">
+        <div className="bg-gray-700 border-b-1 border-gray-700">
+            <div className="flex flex-row justify-between items-center text-center px-4 p-3 md:p-6 md:items-end md:flex-row-reverse">
                 <h1 className="text-4xl text-orange-200 md:text-6xl">
                     Todo App
                 </h1>
@@ -27,7 +27,7 @@ export const HeaderComponent = () => {
                     setDropDownVisibility={setDropDownVisibility}
                     dropDownVisibility={dropDownVisibility}
                 />
-                <div className="hidden md:flex flex-row justify-end items-center h-full">
+                <div className="hidden md:flex flex-row justify-end items-center h-full w-full">
                     {dropDownPath.map((item) => (
                         <Link
                             to={item.path}

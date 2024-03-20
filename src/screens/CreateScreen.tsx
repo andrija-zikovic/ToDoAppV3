@@ -12,7 +12,7 @@ const CreateScreen = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { createTodo } = useTodo()
 
-    const onSubmit = ({ event }: IForm) => {
+    const handleSubmit = ({ event }: IForm) => {
         event.preventDefault()
         setIsSubmitting(true)
 
@@ -27,24 +27,23 @@ const CreateScreen = () => {
             setIsSubmitting(false)
             return
         }
-        console.log('description', description)
         createTodo(description)
     }
 
     return (
-        <div className="w-full min-h-96 flex flex-col justify-start items-center gap-2">
+        <div className="w-full inset-0 flex flex-col justify-start items-center gap-2">
             <button
                 onClick={() => {
                     navigate('/')
                 }}
-                className="dark:border-orange-200 fixed top-20 left-2 md:top-32"
+                className="fixed top-20 left-2 md:top-32"
             >
                 Back
             </button>
 
             <h1 className="text-4xl p-2 mt-28">Create ToDo</h1>
             <TodoForm
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit}
                 submitType={Form.CREATE}
                 errorMessage={errorMessage}
                 isSubmitting={isSubmitting}
