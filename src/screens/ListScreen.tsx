@@ -1,7 +1,7 @@
 import SortByStageBox from '../ui/SortByStageBox/SortByStageBox'
 import SearchBox from '../ui/SearchBox/SearchBox'
 import SortByDateButton from '../ui/Buttons/SortByDateButton'
-import Table from '../ui/ToDoList/ToDoList'
+import ToDoList from '../ui/ToDoList/ToDoList'
 
 export default function ListScreen() {
     return (
@@ -13,7 +13,7 @@ export default function ListScreen() {
                 </div>
                 <SortByStageBox />
             </div>
-            <Table />
+            <ToDoList />
         </div>
     )
 }

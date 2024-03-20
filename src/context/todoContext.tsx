@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import { localStorageWrapper } from '../storage/storage'
 import { TTodo } from '../types/types'
 
@@ -9,24 +9,25 @@ type IProps = {
 interface ContextValues {
     toDoList: TTodo[]
     setToDoList: React.Dispatch<React.SetStateAction<TTodo[]>>
-    setRefetchStorage: React.Dispatch<React.SetStateAction<boolean>>
+    refetchToDoList: () => void
 }
 
 const TodoContext = createContext<null | ContextValues>(null)
 
 export const TodoContextProvider = ({ children }: IProps) => {
-    const [toDoList, setToDoList] = useState([] as TTodo[])
-    const [refetchStorage, setRefetchStorage] = useState(false)
+    const [toDoList, setToDoList] = useState(
+        localStorageWrapper.getItem('toDos') as TTodo[]
+    )
 
-    useEffect(() => {
+    const refetchToDoList = () => {
         const localTable = localStorageWrapper.getItem<TTodo[]>('toDos') || []
         setToDoList(localTable)
-    }, [refetchStorage])
+    }
 
     const contextValues = {
         toDoList,
         setToDoList,
-        setRefetchStorage,
+        refetchToDoList,
     }
 
     return (

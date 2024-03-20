@@ -5,7 +5,6 @@ import ToDoCard from '../ToDoCard/ToDoCard'
 
 const ToDoList = () => {
     const { toDoList } = useContext(TodoContext)!
-
     return (
         <div
             id="ToDosTable"

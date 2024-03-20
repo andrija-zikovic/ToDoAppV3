@@ -1,17 +1,17 @@
+import { useContext } from 'react'
+import { useNavigate } from 'react-router'
 import { localStorageWrapper } from '../storage/storage'
 import { Stage } from '../enums/stage'
 import { TTodo, TUpdateFormData } from '../types/types'
+import MessageContext from '../context/messageContext'
+import TodoContext from '../context/todoContext'
 import dayjs from 'dayjs'
 
-const getValidStorage = () => {
-    const storage = localStorageWrapper.getItem('toDos')
-    if (storage === null) {
-        return { message: 'No todos found', type: 'error' }
-    }
-    return storage
-}
-
 export const useTodo = () => {
+    const { setInfoMessages } = useContext(MessageContext)!
+    const { refetchToDoList } = useContext(TodoContext)!
+    const navigate = useNavigate()
+
     const createTodo = (description: string) => {
         try {
             const storedTodos = localStorageWrapper.getItem('toDos') || []
@@ -28,16 +28,18 @@ export const useTodo = () => {
             const updatedTodos = [newTodo, ...storedTodos]
 
             localStorageWrapper.setItem('toDos', updatedTodos)
+
+            refetchToDoList()
+            navigate('/')
+            setInfoMessages({ message: 'Todo created', type: 'success' })
         } catch (error) {
-            return error
+            setInfoMessages({ message: 'Error creating todo', type: 'error' })
+            return
         }
     }
 
     const updateTodo = ({ id, description, stage }: TUpdateFormData) => {
-        const storage = getValidStorage()
-        if (storage.message) {
-            return storage
-        }
+        const storage = localStorageWrapper.getItem('toDos') || []
 
         const item = storage.find(
             (item: TTodo) => item.id.toString() === id
@@ -49,24 +51,33 @@ export const useTodo = () => {
             stage ? (item.stage = stage) : null
 
             localStorageWrapper.setItem('toDos', storage)
+            setInfoMessages({ message: 'Todo updated', type: 'success' })
+            refetchToDoList()
         } catch (error) {
             console.error(error)
-            return { message: 'Error updating todo', type: 'error' }
+            setInfoMessages({ message: 'Error updating todo', type: 'error' })
+            return
         }
     }
 
     const deleteTodo = (id: string) => {
-        const storage = getValidStorage()
-        if (storage.message) {
-            return storage
-        }
+        const storage = localStorageWrapper.getItem('toDos') || []
 
         const item = storage.find(
             (item: TTodo) => item.id.toString() === id
         ) satisfies TTodo
 
+        if (!item) {
+            setInfoMessages({ message: 'Todo not found', type: 'error' })
+            return
+        }
+
         if (item.stage !== 'done') {
-            return { message: 'You can only delete done todos', type: 'error' }
+            setInfoMessages({
+                message: 'Todo must be done to delete',
+                type: 'error',
+            })
+            return
         }
 
         try {
@@ -75,9 +86,13 @@ export const useTodo = () => {
             )
 
             localStorageWrapper.setItem('toDos', newStorage)
+            refetchToDoList()
+            navigate('/')
+            setInfoMessages({ message: 'Todo deleted', type: 'success' })
         } catch (error) {
             console.error(error)
-            return { message: 'Error deleting todo', type: 'error' }
+            setInfoMessages({ message: 'Error deleting todo', type: 'error' })
+            return
         }
     }
 

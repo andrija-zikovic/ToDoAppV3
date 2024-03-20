@@ -1,5 +1,5 @@
 type IProps = {
-    onConfirm: () => void
+    onDelete: () => void
     onCancel: () => void
     message: string
     message2?: string
@@ -15,7 +15,7 @@ const DeleteConfirmationWindow = (props: IProps) => {
             <div className="flex justify-around gap-4 p-4">
                 <button
                     type="button"
-                    onClick={props.onConfirm}
+                    onClick={props.onDelete}
                     className="bg-green-400 rounded-md"
                 >
                     Yes

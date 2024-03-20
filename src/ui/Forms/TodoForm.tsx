@@ -1,134 +1,27 @@
-import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useTodo } from '../../hooks/useTodo'
-import MessageContext from '../../context/messageContext'
-import TodoContext from '../../context/todoContext'
-import { TTodo } from '../../types/types'
-import { descriptionInputValidation } from '../../validation/descriptionInputValidation'
+import { TTodo, IForm } from '../../types/types'
 import { TForm, Form } from '../../enums/form'
 import TextInput from '../Inputs/TextInput'
 import SubmitButton from '../Buttons/SubmitButton'
 import SelectInput from '../Inputs/SelectInput'
 import DeleteConfirmationWindow from '../DeleteConfirmationWindow/DeleteConfirmationWindow'
 import Overlay from '../Overlay/Overlay'
+import { useState } from 'react'
 
 type IProps = {
+    onSubmit: (form: IForm) => void
+    onDelete?: () => void
+    isSubmitting: boolean
     initData?: TTodo
-    onSubmit: TForm
-    onDelete?: boolean
+    submitType: TForm
+    errorMessage: string
 }
 
-type IForm = {
-    event: React.FormEvent<HTMLFormElement>
-}
-
-const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
+const TodoForm = (props: IProps) => {
     const [isDeleting, setIsDeleting] = useState(false)
-
-    const { setInfoMessages } = useContext(MessageContext)!
-    const { setRefetchStorage } = useContext(TodoContext)!
-
-    const { createTodo, updateTodo, deleteTodo } = useTodo()
-
-    const navigate = useNavigate()
-
-    const refetch = () => {
-        setRefetchStorage((prev) => !prev)
-    }
-
-    const handleSubmitCreate = ({ event }: IForm) => {
-        event.preventDefault()
-        setIsSubmitting(true)
-
-        const formData = new FormData(event.currentTarget)
-
-        const description = formData.get('description') as string | ''
-
-        const descCheck = descriptionInputValidation(description)
-        if (descCheck) {
-            setErrorMessage(descCheck)
-            setIsSubmitting(false)
-            return
-        }
-
-        const create = createTodo(description)
-
-        if (create) {
-            setInfoMessages(create as any)
-            return
-        }
-
-        setInfoMessages({ message: 'Todo created', type: 'success' })
-        setIsSubmitting(false)
-
-        refetch()
-        navigate('/')
-    }
-
-    const handleSubmitUpdate = ({ event }: IForm) => {
-        event.preventDefault()
-        setIsSubmitting(true)
-
-        const formData = new FormData(event.currentTarget)
-
-        const description = formData.get('description') as string | ''
-        const stage = formData.get('stage') as string | ''
-
-        const descCheck = descriptionInputValidation(description)
-        if (descCheck) {
-            setErrorMessage(descCheck)
-            setIsSubmitting(false)
-            return
-        }
-
-        const update = updateTodo({
-            id: initData!.id,
-            description: description,
-            stage: stage,
-        })
-        if (update) {
-            setInfoMessages(update as any)
-            return
-        }
-
-        setInfoMessages({ message: 'Todo updated', type: 'success' })
-        setIsSubmitting(false)
-
-        refetch()
-        navigate('/')
-    }
-
-    const handleSubmit = ({ event }: IForm) => {
-        if (onSubmit === Form.CREATE) {
-            handleSubmitCreate({ event })
-        } else {
-            handleSubmitUpdate({ event })
-        }
-    }
-
-    const handleDelete = () => {
-        const del = deleteTodo(initData!.id)
-        if (del) {
-            console.log(del)
-            setInfoMessages(del as any)
-            return
-        }
-
-        setInfoMessages({ message: 'Todo deleted', type: 'success' })
-
-        refetch()
-        navigate('/')
-    }
-
-    const handleCancel = () => {
-        setIsDeleting(false)
-    }
 
     return (
         <form
-            onSubmit={(event) => handleSubmit({ event })}
+            onSubmit={(e) => props.onSubmit({ event: e })}
             className="w-full h-full flex flex-col justify-center items-center p-2 gap-8"
         >
             <div className="relative flex flex-row justify-center items-center gap-6">
@@ -136,23 +29,23 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
                     label="Description"
                     placeholder="Type here..."
                     name="description"
-                    value={initData?.description}
-                    message={errorMessage}
+                    value={props.initData?.description}
+                    message={props.errorMessage}
                     required={true}
                 />
                 <div className="text-red-600 absolute top-full text-center w-full">
-                    <p>{errorMessage}</p>
+                    <p>{props.errorMessage}</p>
                 </div>
-                {onSubmit === Form.CREATE && (
+                {props.submitType === Form.UPDATE && (
                     <SelectInput
                         label="Stage Change"
                         name="stage"
-                        value={initData!.stage}
+                        value={props.initData!.stage}
                     />
                 )}
             </div>
-            <SubmitButton isSubmitting={isSubmitting} />
-            {onDelete && (
+            <SubmitButton isSubmitting={props.isSubmitting} />
+            {props.submitType === Form.UPDATE && (
                 <button
                     type="button"
                     onClick={() => setIsDeleting(true)}
@@ -164,8 +57,8 @@ const TodoForm = ({ initData, onSubmit, onDelete }: IProps) => {
             {isDeleting && (
                 <Overlay>
                     <DeleteConfirmationWindow
-                        onConfirm={handleDelete}
-                        onCancel={handleCancel}
+                        onDelete={props.onDelete!}
+                        onCancel={() => setIsDeleting(false)}
                         message="Are you sure you want to delete this ToDo?"
                     />
                 </Overlay>
